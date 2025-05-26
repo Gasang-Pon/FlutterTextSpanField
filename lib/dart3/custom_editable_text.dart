@@ -56,6 +56,7 @@ class CustomEditableText extends EditableText {
     super.enableInteractiveSelection = true,
     super.scrollController,
     super.scrollPhysics,
+    super.onTapOutside,
   });
 
   @override
