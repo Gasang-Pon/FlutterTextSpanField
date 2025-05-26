@@ -142,6 +142,7 @@ class TextSpanField extends StatefulWidget {
     this.onEditingComplete,
     this.onSubmitted,
     this.onTap,
+    this.onTapOutside,
   })  : assert(minLines == null || minLines > 0, 'minLines的值必须大于0'),
         assert(maxLines == null || maxLines > 0, 'maxLines的值必须大于0'),
         assert(maxLines == null || minLines == null || maxLines >= minLines, 'minLines必须小于等于maxLines'),
@@ -190,6 +191,7 @@ class TextSpanField extends StatefulWidget {
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onSubmitted;
   final GestureTapCallback? onTap;
+  final ValueChanged<PointerDownEvent>? onTapOutside;
   bool get selectionEnabled => enableInteractiveSelection;
   static const int noMaxLength = -1;
 
@@ -445,6 +447,7 @@ class _TextSpanFieldState extends State<TextSpanField> implements TextSelectionG
       onChanged: widget.onChanged,
       onEditingComplete: widget.onEditingComplete,
       onSubmitted: widget.onSubmitted,
+      onTapOutside: widget.onTapOutside ?? (PointerDownEvent event) => _focusNode.unfocus(),
       onSelectionChanged: _handleSelectionChanged,
       onSelectionHandleTapped: _handleSelectionHandleTapped,
       inputFormatters: formatters,
